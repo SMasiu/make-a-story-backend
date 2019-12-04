@@ -9,12 +9,17 @@
   "author": "smasiu",
   "license": "ISC",
   "dependencies": {
+    "@types/bcrypt": "^3.0.0",
     "@types/express": "^4.17.2",
     "@types/pg": "^7.11.2",
+    "@types/validator": "^12.0.1",
+    "bcrypt": "^3.0.7",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
+    "node": "^13.3.0",
     "pg": "^7.14.0",
     "ts-node": "^8.5.4",
-    "typescript": "^3.7.3"
+    "typescript": "^3.7.3",
+    "validator": "^12.1.0"
   }
 }

@@ -24,8 +24,9 @@ class DatabaseClient {
             let userDb = client.query(`
                 CREATE TABLE IF NOT EXISTS users (
                     id SERIAL,
-                    nick VARCHAR(20) NOT NULL,
-                    email VARCHAR(100) NOT NULL
+                    nick VARCHAR(20) NOT NULL UNIQUE,
+                    email VARCHAR(100) NOT NULL UNIQUE,
+                    password VARCHAR NOT NULL
                 );
             `);
     

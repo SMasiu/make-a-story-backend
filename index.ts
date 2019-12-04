@@ -1,12 +1,14 @@
 import Express from 'express';
-import db from './database/database_setup';
+import db from './database/database';
 import userRouter from './apps/user/router';
 import bodyParser from 'body-parser';
+import serverErrorMiddleware from './middlewares/server-error';
 
 const app = Express();
 
 app.use(bodyParser.json());
 app.use('/user', userRouter);
+app.use('*', serverErrorMiddleware);
 
 db.createDatabase()
     .then( () => {
