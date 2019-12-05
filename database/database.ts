@@ -18,15 +18,31 @@ class DatabaseClient {
         
             let userDb = client.query(`
                 CREATE TABLE IF NOT EXISTS users (
-                    id SERIAL,
+                    id SERIAL PRIMARY KEY,
                     nick VARCHAR(20) NOT NULL UNIQUE,
                     email VARCHAR(100) NOT NULL UNIQUE,
                     password VARCHAR NOT NULL
                 );
             `);
+
+            let storiesDb = client.query(`
+                CREATE TABLE IF NOT EXISTS stories (
+                    id SERIAL PRIMARY KEY,
+                    title VARCHAR(40) NOT NULL
+                );
+            `);
     
+            let fragmentsDb = client.query(`
+                CREATE TABLE IF NOT EXISTS fragments ( 
+                    id SERIAL PRIMARY KEY,
+                    pub_date DATE NOT NULL,
+                    author INTEGER references users(id) NOT NULL,
+                    story INTEGER references stories(id) NOT NULL
+                )
+            `);
+
             try {
-                await Promise.all([userDb]);
+                await Promise.all([userDb, storiesDb, fragmentsDb]);
                 this.client = client;
                 return client;
     
