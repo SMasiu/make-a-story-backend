@@ -1,6 +1,8 @@
 import validator from 'validator';
 import db from '../../database/database';
 import { hash } from './password';
+import { saveToken } from './token';
+import { badRequest, serverError } from '../../http/server-response';
 
 const register = async (req: any, res: any) => {
     
@@ -11,7 +13,7 @@ const register = async (req: any, res: any) => {
         try {
             
             let response = await db.client.query(`
-                SELECT id FROM users WHERE nick = $1 OR email = $2
+                SELECT id FROM users WHERE nick = $1 OR email = $2 LIMIT 1;
             `, [nick, email]);
 
             if(response.rows.length) {
@@ -19,9 +21,7 @@ const register = async (req: any, res: any) => {
             }
 
             try {
-
                 const hashed = await hash(password);
-
                 try {
                     await db.client.query(`
                         INSERT INTO users (nick, email, password) VALUES ($1, $2, $3);
@@ -30,22 +30,24 @@ const register = async (req: any, res: any) => {
                     let response = await db.client.query(`SELECT currval('users_id_seq');`);
                     let id = response.rows[0].currval;
 
+                    saveToken(id, res);
+
                     return res.send({email, nick, id});
 
                 } catch {
-                    return res.status(504).json({message: 'Server error'});
+                    return serverError(res);
                 }
 
             } catch {
-                return res.status(504).json({message: 'Server error'});
+                return serverError(res);
             }
 
         } catch {
-            return res.status(504).json({message: 'Server error'});
+            return serverError(res);
         }
 
     } else {
-        return res.status(400).json({message: 'Invalid data'});
+        return badRequest(res);
     }
 }
 

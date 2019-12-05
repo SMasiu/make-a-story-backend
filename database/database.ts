@@ -1,4 +1,5 @@
 import { Client } from 'pg';
+import { credentials } from '../db-credentials';
 
 class DatabaseClient {
 
@@ -10,13 +11,7 @@ class DatabaseClient {
 
     async createDatabase (): Promise<Client> {
     
-        const client = new Client({
-            user: 'postgres',
-            host: 'localhost',
-            database: 'make_story',
-            password: '!QAZ2wsx',
-            port: 5432,
-        });
+        const client = new Client(credentials);
     
         try {
             await client.connect();
