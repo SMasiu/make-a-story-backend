@@ -11,16 +11,16 @@ export const saveToken = (id: string, res: any) => {
     }));
 }
 
-export const verifyToken = (req: any, res: any): Promise<{id: string}> => {
+export const verifyToken = (req: any, res: any, onVerify: boolean = false): Promise<{id: string, valid: boolean}> => {
     return new Promise((resolve) => {
         let cookies = cookie.parse(req.headers.cookie || '');
         const { token } = cookies;
 
         jwt.verify(token, tokenKey, (err: any, decoded: any) => {
             if(err) {
-                return unauthorized(res);
+                return onVerify ? resolve({valid: false, id: ''}) : unauthorized(res);
             }
-            return resolve(<{id: string}>decoded);
+            return resolve({...(<{id: string}>decoded), valid: true});
         });
     });
 }

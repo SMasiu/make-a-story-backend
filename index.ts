@@ -1,4 +1,5 @@
 import Express from 'express';
+import cors from 'cors';
 import db from './database/database';
 import userRouter from './apps/user/router';
 import storiesRouter from './apps/stories/router';
@@ -6,6 +7,11 @@ import bodyParser from 'body-parser';
 import serverErrorMiddleware from './middlewares/server-error';
 
 const app = Express();
+
+app.use(cors({
+    credentials: true,
+    origin: 'http://localhost:3000'
+}));
 
 app.use(bodyParser.json());
 app.use('/user', userRouter);

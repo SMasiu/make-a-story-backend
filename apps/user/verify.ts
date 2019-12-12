@@ -3,18 +3,26 @@ import db from '../../database/database';
 import { notFound, serverError } from "../../http/server-response";
 
 const verify = async (req: any, res: any) => {
-    let { id } = await verifyToken(req, res);
+    let { id, valid } = await verifyToken(req, res, true);
+
+    if(!valid) {
+        return res.send({
+            valid
+        });
+    }
 
     try {
         let response = await db.client.query(`
-            SELECT nick FROM users WHERE id = $1 LIMIT 1;
+            SELECT nick, email FROM users WHERE id = $1 LIMIT 1;
         `,[id]);
         
         if(response.rows.length) {
-
+            const {email, nick} = response.rows[0];
             return res.send({
                 id,
-                nick: response.rows[0].nick
+                nick,
+                email,
+                valid
             });
 
         } else {

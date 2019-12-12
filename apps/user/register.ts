@@ -5,7 +5,7 @@ import { saveToken } from './token';
 import { badRequest, serverError } from '../../http/server-response';
 
 const register = async (req: any, res: any) => {
-    
+
     if(validate(req.body)) {
 
         const {nick, email, password} = req.body;
@@ -53,15 +53,15 @@ const register = async (req: any, res: any) => {
 
 const validate = ({email, password, confirmPassword, nick}: {[key: string]: string}) => {
     
-    if(!validator.isEmail(email)) {
+    if(validator.isEmpty(email) || !validator.isEmail(email)) {
         return false;
     }
 
-    if(password !== confirmPassword) {
+    if(validator.isEmpty(password) || password !== confirmPassword) {
          return false;
     }
 
-    if(nick.search('@') !== -1) {
+    if(validator.isEmpty(nick) || nick.search('@') !== -1) {
         return false;
     }
 
@@ -70,6 +70,7 @@ const validate = ({email, password, confirmPassword, nick}: {[key: string]: stri
     }
 
     if(nick.length > 20 || email.length > 100) {
+        
         return false;
     }
 
