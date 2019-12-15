@@ -29,6 +29,7 @@ class DatabaseClient {
                 CREATE TABLE IF NOT EXISTS stories (
                     id SERIAL PRIMARY KEY,
                     title VARCHAR(40) NOT NULL,
+                    description VARCHAR(5000) NOT NULL,
                     cover_path VARCHAR(25) NOT NULL
                 );
             `);

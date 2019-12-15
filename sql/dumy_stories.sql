@@ -1,8 +1,8 @@
-INSERT INTO stories(title, cover_path)
+INSERT INTO stories(title, cover_path, description)
 	VALUES 
-		('Dark', 'mockup1.png'),
-	  	('War', 'mockup2.png'),
-		('Winter', 'mockup3.png'),
-		('Game', 'mockup4.png'),
-		('Lost', 'mockup5.png');
+		('Dark', 'mockup1.png', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vero, dolorem labore pariatur facere quia expedita eligendi autem, in voluptates commodi amet blanditiis, nam reiciendis earum hic cupiditate! Impedit illum natus temporibus id odio voluptas iste, eos est eveniet, adipisci inventore dicta, omnis magni ex cum architecto asperiores '),
+	  	('War', 'mockup2.png', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vero, dolorem labore pariatur facere quia expedita eligendi autem, in voluptates commodi amet blanditiis, nam reiciendis earum hic cupiditate! Impedit illum natus temporibus id odio voluptas iste, eos est eveniet, adipisci inventore dicta, omnis magni ex cum architecto asperiores amet necessitatibus '),
+		('Winter', 'mockup3.png', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vero, dolorem labore pariatur facere quia expedita eligendi autem, in voluptates commodi amet blanditiis, nam reiciendis earum hic cupiditate! Impedit illum natus temporibus id odio voluptas iste, eos est eveniet, adipisci inventore dicta'),
+		('Game', 'mockup4.png', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vero, dolorem labore pariatur facere quia expedita eligendi autem, in voluptates commodi amet blanditiis, nam reiciendis earum hic cupiditate! Impedit illum natus temporibus id odio voluptas iste, eos est eveniet, adipisci inventore dicta, omnis magni ex '),
+		('Lost', 'mockup5.png', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vero, dolorem labore pariatur facere quia expedita eligendi autem, in voluptates commodi amet blanditiis, nam reiciendis earum hic cupiditate! Impedit illum natus temporibus id odio voluptas iste, eos est eveniet, adipisci inventore dicta, omnis magni ex cum architecto asperiores amet');
 		
