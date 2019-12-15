@@ -1,9 +1,10 @@
 import Express from 'express';
 import cors from 'cors';
+import bodyParser from 'body-parser';
 import db from './database/database';
 import userRouter from './apps/user/router';
 import storiesRouter from './apps/stories/router';
-import bodyParser from 'body-parser';
+import fragmentsRouter from './apps/fragments/router';
 import serverErrorMiddleware from './middlewares/server-error';
 
 const app = Express();
@@ -12,10 +13,11 @@ app.use(cors({
     credentials: true,
     origin: 'http://localhost:3000'
 }));
-
+app.use(Express.static('public'));
 app.use(bodyParser.json());
 app.use('/user', userRouter);
 app.use('/stories', storiesRouter);
+app.use('/fragments', fragmentsRouter);
 app.use('*', serverErrorMiddleware);
 
 db.createDatabase()

@@ -28,13 +28,16 @@ class DatabaseClient {
             let storiesDb = client.query(`
                 CREATE TABLE IF NOT EXISTS stories (
                     id SERIAL PRIMARY KEY,
-                    title VARCHAR(40) NOT NULL
+                    title VARCHAR(40) NOT NULL,
+                    cover_path VARCHAR(25) NOT NULL
                 );
             `);
     
             let fragmentsDb = client.query(`
                 CREATE TABLE IF NOT EXISTS fragments ( 
                     id SERIAL PRIMARY KEY,
+                    content VARCHAR(5000) NOT NULL,
+                    pos_num INTEGER NOT NULL,
                     pub_date DATE NOT NULL,
                     author INTEGER references users(id) NOT NULL,
                     story INTEGER references stories(id) NOT NULL
