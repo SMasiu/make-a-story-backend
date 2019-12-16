@@ -8,7 +8,7 @@ const getFragments = async (req: any, res: any) => {
     try {
         const response = await db.client.query(`
             SELECT 
-                f.content, f.pub_date, u.nick
+                f.content, f.pub_date, f.pos_num, u.nick
                 FROM fragments f
                 JOIN users u ON f.author = u.id
                 WHERE story = $1
