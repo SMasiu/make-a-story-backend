@@ -7,7 +7,13 @@ const getFragments = async (req: any, res: any) => {
     const offset = parseInt(req.query.offset || 0);
     try {
         const response = await db.client.query(`
-            SELECT * FROM fragments WHERE story = $1 LIMIT 10 OFFSET $2
+            SELECT 
+                f.content, f.pub_date, u.nick
+                FROM fragments f
+                JOIN users u ON f.author = u.id
+                WHERE story = $1
+                LIMIT 10
+                OFFSET $2
         `,[story, offset]);
 
         if(response.rows.length) {
