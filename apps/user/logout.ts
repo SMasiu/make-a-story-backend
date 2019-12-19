@@ -4,7 +4,8 @@ const logout = async (req: any, res: any) => {
 
     res.setHeader('Set-Cookie', cookie.serialize('token', '', {
         httpOnly: true,
-        expires: new Date(Date.now() - 10000)
+        expires: new Date(Date.now() - 10000),
+        path: '/'
     }));
 
     res.send({message: 'Logged out'});

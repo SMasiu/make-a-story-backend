@@ -14,12 +14,13 @@ app.use(cors({
     credentials: true,
     origin: 'http://localhost:3000'
 }));
+
 app.use(Express.static('public'));
 app.use(bodyParser.json());
 app.use('/user', userRouter);
 app.use('/stories', storiesRouter);
 app.use('/fragments', fragmentsRouter);
-app.use('/new', newFragmentsRouter);
+app.use('/news', newFragmentsRouter);
 app.use('*', serverErrorMiddleware);
 
 db.createDatabase()
