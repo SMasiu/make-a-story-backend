@@ -6,7 +6,9 @@ import userRouter from './apps/user/router';
 import storiesRouter from './apps/stories/router';
 import fragmentsRouter from './apps/fragments/router';
 import newFragmentsRouter from './apps/new_fragments/router';
+import votesRouter from './apps/votes/router';
 import serverErrorMiddleware from './middlewares/server-error';
+import compareVotes from './schedule/compare-votes';
 
 const app = Express();
 
@@ -21,6 +23,7 @@ app.use('/user', userRouter);
 app.use('/stories', storiesRouter);
 app.use('/fragments', fragmentsRouter);
 app.use('/news', newFragmentsRouter);
+app.use('/votes', votesRouter);
 app.use('*', serverErrorMiddleware);
 
 db.createDatabase()
@@ -29,6 +32,7 @@ db.createDatabase()
         app.listen(PORT, () => {
             console.log(`Server running on port ${PORT}`);
         });
+        // compareVotes();
     })
     .catch( err => {
         console.log(err)

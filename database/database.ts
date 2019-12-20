@@ -54,8 +54,15 @@ class DatabaseClient {
                 )
             `);
 
+            let votesDb = client.query(`
+                CREATE TABLE IF NOT EXISTS votes (
+                    fragment INTEGER references new_fragments(id) NOT NULL,
+                    user_id INTEGER references users(id) NOT NULL
+                )
+            `)
+                
             try {
-                await Promise.all([userDb, storiesDb, fragmentsDb, newFragmentsDb]);
+                await Promise.all([userDb, storiesDb, fragmentsDb, newFragmentsDb, votesDb]);
                 this.client = client;
                 return client;
     

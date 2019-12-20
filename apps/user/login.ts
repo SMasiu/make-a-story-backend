@@ -19,7 +19,6 @@ const login = async (req: any, res: any) => {
             if(valid === true) {
 
                 saveToken(id, res);
-                console.log(res)
                 return res.send({
                     nick,
                     email,
